@@ -1,0 +1,17 @@
+.post {
+    border: 1px solid black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.post h3 {
+    text-align: center;
+}
+
+.post h4 {
+    text-align: center;
+}
+
+.buttonContainer {
+    text-align: center;
+}

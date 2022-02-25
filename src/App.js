@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react"
+import Post from "./components/Post"
+import './App.css'
+import AddPost from "./components/forms/AddPost"
 
 function App() {
+  const [post, setPost] = useState([])
+
+  let getPosts = () => {
+    fetch("http://localhost:3000/posts")
+      .then(res => res.json())
+      .then(data => setPost(data.posts))
+  }
+
+  useEffect(() => {
+    getPosts()
+  }, [])
+
+  let showPosts = post.map(item => <Post data={item} key={item._id} getPosts={getPosts}/>)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Blog frontend</h1>
+      <AddPost getPosts={getPosts}/>
+      {showPosts}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
